@@ -34,7 +34,7 @@ class RegisterScreen extends StatelessWidget {
                   color: Color.fromARGB(255, 255, 255, 255),
                   borderRadius: BorderRadius.all(Radius.circular(15))),
               width: 324,
-              height: 460,
+              height: 630,
               child: Form(
                   child: Column(
                 children: [
