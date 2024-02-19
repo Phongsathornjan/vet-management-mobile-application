@@ -12,7 +12,7 @@ class LoginScreen extends StatelessWidget {
 
   signIn() {}
 
-  signOut() {}
+  goto_register() {}
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class LoginScreen extends StatelessWidget {
                       hintText: 'Enter your email.',
                       obscureText: false,
                       labelText: 'Email',
-                      icon: Icon(Icons.email),
+                      icon: Icon(Icons.email_outlined),
                     ),
                     const SizedBox(
                       height: 25,
@@ -77,7 +77,7 @@ class LoginScreen extends StatelessWidget {
                         hintText: 'Enter your password.',
                         obscureText: true,
                         labelText: 'Password',
-                        icon: Icon(Icons.lock)),
+                        icon: Icon(Icons.lock_outline_rounded)),
                     const SizedBox(
                       height: 25,
                     ),
@@ -99,7 +99,7 @@ class LoginScreen extends StatelessWidget {
                       height: 13,
                     ),
                     MyButton(
-                        onTap: signOut,
+                        onTap: goto_register,
                         hinText: 'สมัครสมาชิก',
                         color: Color.fromARGB(255, 255, 255, 255)),
                   ],
