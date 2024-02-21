@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vet_care/component/mybutton.dart';
 import 'package:vet_care/component/mytextfield.dart';
+import 'package:vet_care/screen/menuscreen.dart';
+import 'package:vet_care/screen/registerscreen.dart';
 import 'package:vet_care/widgets/background_widget.dart';
 import 'package:vet_care/widgets/colorbrowshade_widget.dart';
 
@@ -9,10 +11,6 @@ class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
   final emailcontroller = TextEditingController();
   final passcontroller = TextEditingController();
-
-  signIn() {}
-
-  goto_register() {}
 
   @override
   Widget build(BuildContext context) {
@@ -37,27 +35,34 @@ class LoginScreen extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset("assets/images/logo.png"),
-                        Column(
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  'Animal Care Clinic',
-                                  style: GoogleFonts.inter(
-                                      textStyle: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w400),
-                                      color: Color.fromARGB(255, 90, 90, 90)),
-                                )
-                              ],
-                            ),
-                          ],
-                        )
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Image.asset(
+                            "assets/images/logo.png",
+                            height: 80,
+                            width: 105,
+                          ),
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    'Animal Care Clinic',
+                                    style: GoogleFonts.inter(
+                                        textStyle: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w400),
+                                        color: Color.fromARGB(255, 90, 90, 90)),
+                                  )
+                                ],
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
@@ -82,7 +87,12 @@ class LoginScreen extends StatelessWidget {
                       height: 25,
                     ),
                     MyButton(
-                        onTap: signIn,
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MenuScreen()));
+                        },
                         hinText: 'เข้าสู่ระบบ',
                         color: Color.fromARGB(255, 187, 166, 159)),
                     const SizedBox(
@@ -99,7 +109,12 @@ class LoginScreen extends StatelessWidget {
                       height: 13,
                     ),
                     MyButton(
-                        onTap: goto_register,
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RegisterScreen()));
+                        },
                         hinText: 'สมัครสมาชิก',
                         color: Color.fromARGB(255, 255, 255, 255)),
                   ],
