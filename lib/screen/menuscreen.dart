@@ -63,12 +63,12 @@ class MenuScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             Image.asset(
-                              'assets/images/menu1.png',
+                              'assets/images/pethistory.png',
                               width: 64,
                               height: 64,
                             ),
                             Text(
-                              'โปรไฟล์สัตว์',
+                              'ประวัติการรักษา',
                               style: GoogleFonts.notoSansThai(
                                   textStyle: const TextStyle(
                                       fontSize: 15,
@@ -97,12 +97,12 @@ class MenuScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             Image.asset(
-                              'assets/images/menu1.png',
+                              'assets/images/calendar.png',
                               width: 64,
                               height: 64,
                             ),
                             Text(
-                              'โปรไฟล์สัตว์',
+                              'ตรวจสอบคิว',
                               style: GoogleFonts.notoSansThai(
                                   textStyle: const TextStyle(
                                       fontSize: 15,
@@ -127,12 +127,12 @@ class MenuScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             Image.asset(
-                              'assets/images/menu1.png',
+                              'assets/images/payment.png',
                               width: 64,
                               height: 64,
                             ),
                             Text(
-                              'โปรไฟล์สัตว์',
+                              'การชำระเงิน',
                               style: GoogleFonts.notoSansThai(
                                   textStyle: const TextStyle(
                                       fontSize: 15,
@@ -164,18 +164,9 @@ class MenuScreen extends StatelessWidget {
                             Column(
                               children: [
                                 Image.asset(
-                                  'assets/images/menu1.png',
+                                  'assets/images/appointment.png',
                                   width: 64,
                                   height: 64,
-                                ),
-                                Text(
-                                  'โปรไฟล์สัตว์',
-                                  style: GoogleFonts.notoSansThai(
-                                      textStyle: const TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w400),
-                                      color:
-                                          const Color.fromARGB(255, 0, 0, 0)),
                                 ),
                               ],
                             ),
