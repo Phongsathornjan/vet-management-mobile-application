@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:vet_care/screen/pet_history_screen.dart';
 import 'package:vet_care/widgets/background_widget.dart';
 import 'package:vet_care/widgets/colorbrowshade_widget.dart';
 import 'package:vet_care/widgets/logo_widget.dart';
@@ -22,124 +23,74 @@ class MenuScreen extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Container(
-                      decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          borderRadius: BorderRadius.all(Radius.circular(15))),
-                      width: 105,
-                      height: 105,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/images/menu1.png',
-                              width: 64,
-                              height: 64,
-                            ),
-                            Text(
-                              'โปรไฟล์สัตว์',
-                              style: GoogleFonts.notoSansThai(
-                                  textStyle: const TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w400),
-                                  color: const Color.fromARGB(255, 0, 0, 0)),
-                            ),
-                          ],
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        decoration: const BoxDecoration(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                        width: 105,
+                        height: 105,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Column(
+                            children: [
+                              Image.asset(
+                                'assets/images/menu1.png',
+                                width: 64,
+                                height: 64,
+                              ),
+                              Text(
+                                'โปรไฟล์สัตว์',
+                                style: GoogleFonts.notoSansThai(
+                                    textStyle: const TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w400),
+                                    color: const Color.fromARGB(255, 0, 0, 0)),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                     const SizedBox(
-                      width: 60,
+                      width: 85,
                     ),
-                    Container(
-                      decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          borderRadius: BorderRadius.all(Radius.circular(15))),
-                      width: 105,
-                      height: 105,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/images/pethistory.png',
-                              width: 64,
-                              height: 64,
-                            ),
-                            Text(
-                              'ประวัติการรักษา',
-                              style: GoogleFonts.notoSansThai(
-                                  textStyle: const TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w400),
-                                  color: const Color.fromARGB(255, 0, 0, 0)),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                Row(
-                  children: [
-                    Container(
-                      decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          borderRadius: BorderRadius.all(Radius.circular(15))),
-                      width: 105,
-                      height: 105,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/images/calendar.png',
-                              width: 64,
-                              height: 64,
-                            ),
-                            Text(
-                              'ตรวจสอบคิว',
-                              style: GoogleFonts.notoSansThai(
-                                  textStyle: const TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w400),
-                                  color: const Color.fromARGB(255, 0, 0, 0)),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 60,
-                    ),
-                    Container(
-                      decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          borderRadius: BorderRadius.all(Radius.circular(15))),
-                      width: 105,
-                      height: 105,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/images/payment.png',
-                              width: 64,
-                              height: 64,
-                            ),
-                            Text(
-                              'การชำระเงิน',
-                              style: GoogleFonts.notoSansThai(
-                                  textStyle: const TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w400),
-                                  color: const Color.fromARGB(255, 0, 0, 0)),
-                            ),
-                          ],
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const PedHistoryScreen()));
+                      },
+                      child: Container(
+                        decoration: const BoxDecoration(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                        width: 105,
+                        height: 105,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Column(
+                            children: [
+                              Image.asset(
+                                'assets/images/pethistory.png',
+                                width: 64,
+                                height: 64,
+                              ),
+                              Text(
+                                'ประวัติการรักษา',
+                                style: GoogleFonts.notoSansThai(
+                                    textStyle: const TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w400),
+                                    color: const Color.fromARGB(255, 0, 0, 0)),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
