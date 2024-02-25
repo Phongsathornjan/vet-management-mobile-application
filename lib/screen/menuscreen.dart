@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vet_care/screen/pet_history_screen.dart';
+import 'package:vet_care/screen/pet_profile_screen.dart';
 import 'package:vet_care/widgets/background_widget.dart';
 import 'package:vet_care/widgets/colorbrowshade_widget.dart';
 import 'package:vet_care/widgets/logo_widget.dart';
@@ -24,7 +25,13 @@ class MenuScreen extends StatelessWidget {
                 Row(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const PetProfileScreen()));
+                      },
                       child: Container(
                         decoration: const BoxDecoration(
                             color: Color.fromARGB(255, 255, 255, 255),
@@ -101,83 +108,88 @@ class MenuScreen extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Container(
-                      decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          borderRadius: BorderRadius.all(Radius.circular(15))),
-                      width: 300,
-                      height: 105,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 15),
-                        child: Row(
-                          children: [
-                            Column(
-                              children: [
-                                Image.asset(
-                                  'assets/images/appointment.png',
-                                  width: 64,
-                                  height: 64,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Column(
-                              children: [
-                                Text(
-                                  'ตารางนัดหมาย',
-                                  style: GoogleFonts.notoSansThai(
-                                      textStyle: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400),
-                                      color:
-                                          const Color.fromARGB(255, 0, 0, 0)),
-                                ),
-                                Text(
-                                  'ฉีดยาโรคพิษสุนัขบ้า',
-                                  style: GoogleFonts.notoSansThai(
-                                      textStyle: const TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w400),
-                                      color:
-                                          const Color.fromARGB(179, 0, 0, 0)),
-                                ),
-                                const SizedBox(
-                                  height: 7,
-                                ),
-                                Container(
-                                  decoration: const BoxDecoration(
-                                      color: Color.fromARGB(100, 183, 171, 159),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(8))),
-                                  width: 175,
-                                  height: 30,
-                                  child: Row(
-                                    children: [
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                      const Icon(Icons.timer_outlined),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        '12 ก.พ. 2567 14:00 น.',
-                                        style: GoogleFonts.notoSansThai(
-                                            textStyle: const TextStyle(
-                                                fontSize: 13,
-                                                fontWeight: FontWeight.w400),
-                                            color: const Color.fromARGB(
-                                                179, 0, 0, 0)),
-                                      ),
-                                    ],
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        decoration: const BoxDecoration(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                        width: 300,
+                        height: 105,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 15),
+                          child: Row(
+                            children: [
+                              Column(
+                                children: [
+                                  Image.asset(
+                                    'assets/images/appointment.png',
+                                    width: 64,
+                                    height: 64,
                                   ),
-                                ),
-                              ],
-                            )
-                          ],
+                                ],
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              Column(
+                                children: [
+                                  Text(
+                                    'ตารางนัดหมาย',
+                                    style: GoogleFonts.notoSansThai(
+                                        textStyle: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400),
+                                        color:
+                                            const Color.fromARGB(255, 0, 0, 0)),
+                                  ),
+                                  Text(
+                                    'ฉีดยาโรคพิษสุนัขบ้า',
+                                    style: GoogleFonts.notoSansThai(
+                                        textStyle: const TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w400),
+                                        color:
+                                            const Color.fromARGB(179, 0, 0, 0)),
+                                  ),
+                                  const SizedBox(
+                                    height: 7,
+                                  ),
+                                  Container(
+                                    decoration: const BoxDecoration(
+                                        color:
+                                            Color.fromARGB(100, 183, 171, 159),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(8))),
+                                    width: 175,
+                                    height: 30,
+                                    child: Row(
+                                      children: [
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        const Icon(Icons.timer_outlined),
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text(
+                                          '12 ก.พ. 2567 14:00 น.',
+                                          style: GoogleFonts.notoSansThai(
+                                              textStyle: const TextStyle(
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w400),
+                                              color: const Color.fromARGB(
+                                                  179, 0, 0, 0)),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),

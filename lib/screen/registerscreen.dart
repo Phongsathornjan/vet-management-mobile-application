@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vet_care/component/mybutton.dart';
 import 'package:vet_care/component/mytextfield.dart';
-import 'package:vet_care/screen/menuscreen.dart';
+import 'package:vet_care/screen/loginscreen.dart';
 import 'package:vet_care/widgets/background_widget.dart';
 import 'package:vet_care/widgets/colorbrowshade_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -197,7 +197,7 @@ class RegisterScreen extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => MenuScreen()));
+                                builder: (context) => LoginScreen()));
                       },
                       hinText: 'สมัครสมาชิก',
                       color: Color.fromARGB(255, 187, 166, 159)),

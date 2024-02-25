@@ -7,20 +7,26 @@ final List<String> entries = <String>[
   'ฉีดวัคซีนโรคหวัดแมว',
 ];
 
+final List<String> time = <String>[
+  '14 ก.พ. 2567 14:00 น.',
+  '12 ก.พ. 2567 15:00 น.',
+  '10 ก.พ. 2567 16:00 น.',
+];
+
 class PetHistory extends StatelessWidget {
   const PetHistory({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      padding: const EdgeInsets.symmetric(horizontal: 30),
+      padding: const EdgeInsets.symmetric(horizontal: 40),
       itemCount: entries.length,
       itemBuilder: (BuildContext context, int index) {
         return Container(
           decoration: const BoxDecoration(
-              color: Color.fromARGB(183, 255, 255, 255),
+              color: Color.fromARGB(255, 255, 255, 255),
               borderRadius: BorderRadius.all(Radius.circular(15))),
-          height: 71,
+          height: 70,
           child: Padding(
             padding: const EdgeInsets.all(5.0),
             child: Column(
@@ -51,7 +57,7 @@ class PetHistory extends StatelessWidget {
                         width: 5,
                       ),
                       Text(
-                        '12 ก.พ. 2567 14:00 น.',
+                        '${time[index]}',
                         style: GoogleFonts.notoSansThai(
                             textStyle: const TextStyle(
                                 fontSize: 13, fontWeight: FontWeight.w400),

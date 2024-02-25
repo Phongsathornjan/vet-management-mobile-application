@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:introduction_screen/introduction_screen.dart';
-import 'package:vet_care/screen/new_bottom_nav.dart';
+import 'package:vet_care/screen/bottom_nav.dart';
 import 'package:vet_care/widgets/background_widget.dart';
 import 'package:vet_care/widgets/colorbrowshade_widget.dart';
 import 'package:vet_care/widgets/logo_widget.dart';
 
+// ignore: must_be_immutable
 class Schedule extends StatelessWidget {
   Schedule({super.key});
-  final emailcontroller = TextEditingController();
-  final passcontroller = TextEditingController();
-  int currentIndex = 0;
-  signIn() {}
-
-  queue() {}
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +81,6 @@ class Schedule extends StatelessWidget {
             ),
           ],
         ),
-        bottomNavigationBar: BottomBar());
+        bottomNavigationBar: BottomNavBarScreen());
   }
 }
