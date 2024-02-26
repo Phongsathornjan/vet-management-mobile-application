@@ -187,19 +187,27 @@ class PetProfileScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 220,
-            left: 132,
-            child: Container(
+              top: 220,
+              left: 132,
+              child: Container(
+                padding: EdgeInsets.all(8),
+                //decoration: const BoxDecoration(
+                //color: Colors.black, shape: BoxShape.circle),
+                //child:
+
                 decoration: const BoxDecoration(
-                    color: Color.fromARGB(85, 0, 0, 0),
-                    borderRadius: BorderRadius.all(Radius.circular(100))),
-                width: 128,
-                height: 128,
-                child: const CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/userpet.jpg'),
-                  radius: 55.0,
-                )),
-          )
+                    color: Colors.white, shape: BoxShape.circle),
+                //borderRadius: BorderRadius.all(Radius.circular(100))),
+                //width: 118,
+                //height: 118,
+                child: ClipOval(
+                  child: SizedBox.fromSize(
+                    size: Size.fromRadius(58),
+                    child: Image.asset('assets/images/userpet.jpg',
+                        fit: BoxFit.cover),
+                  ),
+                ),
+              )),
         ],
       ),
     );
