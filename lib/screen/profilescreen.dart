@@ -16,7 +16,6 @@ class ProfileScreen extends StatelessWidget {
             return Text('Error: ${snapshot.error}');
           } else {
             final prefs = snapshot.data!;
-            final id = prefs.getString('id') ?? '';
             final firstname = prefs.getString('firstname') ?? '';
             final lastname = prefs.getString('lastname') ?? '';
             final phone = prefs.getString('phone') ?? '';
