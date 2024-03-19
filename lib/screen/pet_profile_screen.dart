@@ -1,11 +1,45 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:vet_care/screen/pet_history_screen.dart';
 import 'package:vet_care/widgets/background_widget.dart';
 import 'package:vet_care/widgets/colorbrowshade_widget.dart';
 import 'package:vet_care/widgets/logo_widget.dart';
+import 'package:http/http.dart' as http;
 
-class PetProfileScreen extends StatelessWidget {
-  const PetProfileScreen({super.key});
+class PetProfileScreen extends StatefulWidget {
+  const PetProfileScreen({super.key, required this.id});
+
+  final String id;
+
+  @override
+  State<PetProfileScreen> createState() => _PetProfileScreenState();
+}
+
+class _PetProfileScreenState extends State<PetProfileScreen> {
+  List pet = [];
+
+  Future<void> getRecord() async {
+    print(widget.id);
+    String uri =
+        "http://10.0.2.2/php_api/view_eachpet_data.php?idpet=${widget.id}";
+    try {
+      var response = await http.get(Uri.parse(uri));
+      setState(() {
+        pet = jsonDecode(response.body);
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getRecord();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +57,13 @@ class PetProfileScreen extends StatelessWidget {
                   color: Color.fromARGB(255, 255, 255, 255),
                   borderRadius: BorderRadius.all(Radius.circular(15))),
               width: 265,
-              height: 379,
+              height: 400,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 51),
                 child: Column(
                   children: [
                     const SizedBox(
-                      height: 100,
+                      height: 20,
                     ),
                     Row(
                       children: [
@@ -55,7 +89,9 @@ class PetProfileScreen extends StatelessWidget {
                                   color: Color.fromARGB(255, 0, 0, 0)),
                             ),
                             Text(
-                              'น้องเหมียว',
+                              pet.isNotEmpty
+                                  ? pet[0]['pet_name']
+                                  : 'Loading...',
                               style: GoogleFonts.notoSansThai(
                                   textStyle: const TextStyle(
                                       fontSize: 14,
@@ -93,7 +129,9 @@ class PetProfileScreen extends StatelessWidget {
                                   color: Color.fromARGB(255, 0, 0, 0)),
                             ),
                             Text(
-                              '5 พฤษภาคม 2565',
+                              pet.isNotEmpty
+                                  ? pet[0]['birthdate']
+                                  : 'Loading...',
                               style: GoogleFonts.notoSansThai(
                                   textStyle: const TextStyle(
                                       fontSize: 14,
@@ -110,7 +148,7 @@ class PetProfileScreen extends StatelessWidget {
                     Row(
                       children: [
                         Image.asset(
-                          'assets/images/age.png',
+                          'assets/images/book.png',
                           width: 31,
                           height: 31,
                         ),
@@ -123,7 +161,7 @@ class PetProfileScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'อายุ',
+                              'ประเภท',
                               style: GoogleFonts.notoSansThai(
                                   textStyle: const TextStyle(
                                       fontSize: 14,
@@ -131,7 +169,7 @@ class PetProfileScreen extends StatelessWidget {
                                   color: Color.fromARGB(255, 0, 0, 0)),
                             ),
                             Text(
-                              '1 ขวบ',
+                              pet.isNotEmpty ? pet[0]['species'] : 'Loading...',
                               style: GoogleFonts.notoSansThai(
                                   textStyle: const TextStyle(
                                       fontSize: 14,
@@ -148,7 +186,7 @@ class PetProfileScreen extends StatelessWidget {
                     Row(
                       children: [
                         Image.asset(
-                          'assets/images/medicine.png',
+                          'assets/images/menu1.png',
                           width: 32,
                           height: 32,
                         ),
@@ -161,7 +199,7 @@ class PetProfileScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'ประวัติแพ้ยา',
+                              'สายพันธุ์',
                               style: GoogleFonts.notoSansThai(
                                   textStyle: const TextStyle(
                                       fontSize: 14,
@@ -170,7 +208,7 @@ class PetProfileScreen extends StatelessWidget {
                               textAlign: TextAlign.left,
                             ),
                             Text(
-                              'ไม่มี',
+                              pet.isNotEmpty ? pet[0]['breed'] : 'Loading...',
                               style: GoogleFonts.notoSansThai(
                                   textStyle: const TextStyle(
                                       fontSize: 14,
@@ -181,25 +219,97 @@ class PetProfileScreen extends StatelessWidget {
                         )
                       ],
                     ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        Image.asset(
+                          'assets/images/weight.png',
+                          width: 30,
+                          height: 30,
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Column(
+                          mainAxisAlignment:
+                              MainAxisAlignment.start, // แก้ไขตรงนี้
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'น้ำหนัก',
+                              style: GoogleFonts.notoSansThai(
+                                  textStyle: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold),
+                                  color: Color.fromARGB(255, 0, 0, 0)),
+                            ),
+                            Text(
+                              pet.isNotEmpty ? pet[0]['weight'] : 'Loading...',
+                              style: GoogleFonts.notoSansThai(
+                                  textStyle: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400),
+                                  color: Color.fromARGB(255, 90, 90, 90)),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const PedHistoryScreen()));
+                      },
+                      child: Container(
+                        decoration: const BoxDecoration(
+                            color: Color.fromARGB(157, 219, 168, 72),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              'assets/images/medicine.png',
+                              width: 30,
+                              height: 30,
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            Column(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.start, // แก้ไขตรงนี้
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                Text(
+                                  'ประวัติการรักษา',
+                                  style: GoogleFonts.notoSansThai(
+                                      textStyle: const TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold),
+                                      color: Color.fromARGB(255, 0, 0, 0)),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
           ),
-          Positioned(
-            top: 220,
-            left: 132,
-            child: Container(
-                decoration: const BoxDecoration(
-                    color: Color.fromARGB(85, 0, 0, 0),
-                    borderRadius: BorderRadius.all(Radius.circular(100))),
-                width: 128,
-                height: 128,
-                child: const CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/userpet.jpg'),
-                  radius: 55.0,
-                )),
-          )
         ],
       ),
     );

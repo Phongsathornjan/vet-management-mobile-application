@@ -1,16 +1,91 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vet_care/component/mybutton.dart';
 import 'package:vet_care/component/mytextfield.dart';
 import 'package:vet_care/screen/registerscreen.dart';
 import 'package:vet_care/screen/rountscreen.dart';
 import 'package:vet_care/widgets/background_widget.dart';
 import 'package:vet_care/widgets/colorbrowshade_widget.dart';
+import 'package:http/http.dart' as http;
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
-  final emailcontroller = TextEditingController();
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final usernamecontroller = TextEditingController();
   final passcontroller = TextEditingController();
+
+  Future login() async {
+    try {
+      String uri = 'http://10.0.2.2/php_api/verify.php';
+      var res = await http.post(Uri.parse(uri), body: {
+        "username": usernamecontroller.text,
+        "password": passcontroller.text,
+      });
+
+      var response = jsonDecode(res.body);
+      if (response["status"] == "success") {
+        if (response["role"] == "member") {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => RountScreen()));
+          saveUserData(response["id"], response["firstname"],
+              response["lastname"], response["username"], response["phone"]);
+        } else {
+          _showMyDialog('รหัสผ่านไม่ถูกต้อง');
+        }
+      } else if (response["status"] == "no_match_pass") {
+        _showMyDialog(response['message']);
+        print(response['message']);
+      } else if (response["status"] == "no_username") {
+        _showMyDialog(response['message']);
+        print(response['message']);
+      } else if (response["status"] == "fill_in_blank") {
+        _showMyDialog(response['message']);
+        print(response['message']);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void saveUserData(String id, String firstname, String lastname,
+      String username, String phone) async {
+    SharedPreferences.getInstance().then(
+      (prefs) {
+        prefs.setString('id', id);
+        prefs.setString('firstname', firstname);
+        prefs.setString('lastname', lastname);
+        prefs.setString('username', username);
+        prefs.setString('phone', phone);
+      },
+    );
+  }
+
+  void _showMyDialog(String txtMsg) async {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Expanded(
+              child: AlertDialog(
+            backgroundColor: Color.fromARGB(255, 228, 180, 118),
+            title: const Text('status'),
+            content: Text(txtMsg),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'OK'),
+                child: const Text('OK'),
+              ),
+            ],
+          ));
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,11 +143,11 @@ class LoginScreen extends StatelessWidget {
                       height: 20,
                     ),
                     MyTextFiled(
-                      controller: emailcontroller,
-                      hintText: 'Enter your email.',
+                      controller: usernamecontroller,
+                      hintText: 'Enter your username.',
                       obscureText: false,
-                      labelText: 'Email',
-                      icon: Icon(Icons.email_outlined),
+                      labelText: 'username',
+                      icon: Icon(Icons.person),
                     ),
                     const SizedBox(
                       height: 25,
@@ -88,10 +163,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     MyButton(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => RountScreen()));
+                          login();
                         },
                         hinText: 'เข้าสู่ระบบ',
                         color: Color.fromARGB(255, 187, 166, 159)),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vet_care/screen/pet_history_screen.dart';
-import 'package:vet_care/screen/pet_profile_screen.dart';
+import 'package:vet_care/screen/pet_screen.dart';
 import 'package:vet_care/widgets/background_widget.dart';
 import 'package:vet_care/widgets/colorbrowshade_widget.dart';
 import 'package:vet_care/widgets/logo_widget.dart';
@@ -25,12 +25,11 @@ class MenuScreen extends StatelessWidget {
                 Row(
                   children: [
                     GestureDetector(
-                      onTap: () {
+                      onTap: () async {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    const PetProfileScreen()));
+                                builder: (context) => const PetScreen()));
                       },
                       child: Container(
                         decoration: const BoxDecoration(
