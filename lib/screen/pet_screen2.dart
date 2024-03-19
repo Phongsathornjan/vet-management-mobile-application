@@ -3,20 +3,20 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vet_care/screen/pet_profile_screen.dart';
+import 'package:vet_care/screen/pet_history_screen.dart';
 import 'package:vet_care/widgets/background_widget.dart';
 import 'package:vet_care/widgets/colorbrowshade_widget.dart';
 import 'package:vet_care/widgets/logo_widget.dart';
 import 'package:http/http.dart' as http;
 
-class PetScreen extends StatefulWidget {
-  const PetScreen({Key? key}) : super(key: key);
+class PetScreen2 extends StatefulWidget {
+  const PetScreen2({Key? key}) : super(key: key);
 
   @override
-  State<PetScreen> createState() => _PetScreenState();
+  State<PetScreen2> createState() => _PetScreen2State();
 }
 
-class _PetScreenState extends State<PetScreen> {
+class _PetScreen2State extends State<PetScreen2> {
   List pet = [];
 
   Future<void> getRecord() async {
@@ -44,9 +44,7 @@ class _PetScreenState extends State<PetScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => PetProfileScreen(
-          id: petId,
-        ),
+        builder: (context) => PedHistoryScreen(id: petId),
       ),
     );
   }

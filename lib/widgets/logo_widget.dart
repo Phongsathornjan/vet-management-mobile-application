@@ -4,12 +4,15 @@ import 'package:google_fonts/google_fonts.dart';
 class logo_widget extends StatelessWidget {
   const logo_widget({
     super.key,
+    required this.i,
   });
+
+  final double i;
 
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: 100,
+      top: i,
       left: 38,
       right: 38,
       child: Container(

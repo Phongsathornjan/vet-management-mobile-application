@@ -1,13 +1,46 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:vet_care/screen/pet_history_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vet_care/screen/pet_screen.dart';
+import 'package:vet_care/screen/pet_screen2.dart';
 import 'package:vet_care/widgets/background_widget.dart';
 import 'package:vet_care/widgets/colorbrowshade_widget.dart';
 import 'package:vet_care/widgets/logo_widget.dart';
+import 'package:http/http.dart' as http;
 
-class MenuScreen extends StatelessWidget {
+class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
+
+  @override
+  State<MenuScreen> createState() => _MenuScreenState();
+}
+
+class _MenuScreenState extends State<MenuScreen> {
+  List appointment = [];
+
+  Future<void> getRecord() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? name = prefs.getString('firstname');
+    String uri =
+        "https://setest123.000webhostapp.com/php_api/select_user_appointment.php?name=$name";
+    try {
+      var response = await http.get(Uri.parse(uri));
+      setState(() {
+        appointment = jsonDecode(response.body);
+      });
+    } catch (e) {
+      print(e);
+    }
+    //print(appointment[0]['booking_datetime']);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getRecord();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +49,9 @@ class MenuScreen extends StatelessWidget {
         children: [
           const background(),
           const ColorBrowShade(),
-          logo_widget(),
+          logo_widget(
+            i: 100,
+          ),
           Positioned(
             left: 50,
             top: 260,
@@ -68,8 +103,7 @@ class MenuScreen extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    const PedHistoryScreen()));
+                                builder: (context) => PetScreen2()));
                       },
                       child: Container(
                         decoration: const BoxDecoration(
@@ -118,7 +152,7 @@ class MenuScreen extends StatelessWidget {
                         height: 105,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 15),
+                              vertical: 15, horizontal: 15),
                           child: Row(
                             children: [
                               Column(
@@ -134,9 +168,10 @@ class MenuScreen extends StatelessWidget {
                                 width: 20,
                               ),
                               Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'ตารางนัดหมาย',
+                                    'การนัดหมายครั้งถัดไป',
                                     style: GoogleFonts.notoSansThai(
                                         textStyle: const TextStyle(
                                             fontSize: 16,
@@ -144,47 +179,59 @@ class MenuScreen extends StatelessWidget {
                                         color:
                                             const Color.fromARGB(255, 0, 0, 0)),
                                   ),
-                                  Text(
-                                    'ฉีดยาโรคพิษสุนัขบ้า',
-                                    style: GoogleFonts.notoSansThai(
-                                        textStyle: const TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w400),
-                                        color:
-                                            const Color.fromARGB(179, 0, 0, 0)),
-                                  ),
                                   const SizedBox(
                                     height: 7,
                                   ),
-                                  Container(
-                                    decoration: const BoxDecoration(
-                                        color:
-                                            Color.fromARGB(100, 183, 171, 159),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(8))),
-                                    width: 175,
-                                    height: 30,
-                                    child: Row(
-                                      children: [
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        const Icon(Icons.timer_outlined),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text(
-                                          '12 ก.พ. 2567 14:00 น.',
-                                          style: GoogleFonts.notoSansThai(
-                                              textStyle: const TextStyle(
+                                  appointment
+                                          .isNotEmpty // เพิ่มเงื่อนไขเช็ค appointment ว่ามีข้อมูลหรือไม่
+                                      ? Container(
+                                          decoration: const BoxDecoration(
+                                              color: Color.fromARGB(
+                                                  100, 183, 171, 159),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(8))),
+                                          width: 175,
+                                          height: 30,
+                                          child: Row(
+                                            children: [
+                                              const SizedBox(
+                                                width: 5,
+                                              ),
+                                              const Icon(Icons.timer_outlined),
+                                              const SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text(
+                                                appointment[0]
+                                                    ['booking_datetime'],
+                                                style: GoogleFonts.notoSansThai(
+                                                    textStyle: const TextStyle(
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.w400),
+                                                    color: const Color.fromARGB(
+                                                        179, 0, 0, 0)),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      : Container(
+                                          decoration: const BoxDecoration(
+                                              color: Color.fromARGB(
+                                                  100, 183, 171, 159),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(8))),
+                                          width: 175,
+                                          height: 30,
+                                          child: const Center(
+                                            child: Text(
+                                              'Loading...',
+                                              style: TextStyle(
                                                   fontSize: 13,
                                                   fontWeight: FontWeight.w400),
-                                              color: const Color.fromARGB(
-                                                  179, 0, 0, 0)),
+                                            ),
+                                          ),
                                         ),
-                                      ],
-                                    ),
-                                  ),
                                 ],
                               )
                             ],

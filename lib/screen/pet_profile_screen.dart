@@ -24,7 +24,7 @@ class _PetProfileScreenState extends State<PetProfileScreen> {
   Future<void> getRecord() async {
     print(widget.id);
     String uri =
-        "http://10.0.2.2/php_api/view_eachpet_data.php?idpet=${widget.id}";
+        "https://setest123.000webhostapp.com/php_api/view_eachpet_data.php?idpet=${widget.id}";
     try {
       var response = await http.get(Uri.parse(uri));
       setState(() {
@@ -41,16 +41,39 @@ class _PetProfileScreenState extends State<PetProfileScreen> {
     getRecord();
   }
 
+  onTapFunction() async {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => PedHistoryScreen(
+                  id: widget.id,
+                )));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Text(
+            'ข้อมูลสัตว์เลี้ยง',
+            style: GoogleFonts.notoSansThai(
+                textStyle:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+                color: const Color.fromARGB(255, 0, 0, 0)),
+          ),
+        ),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      ),
       body: Stack(
         children: [
           background(),
           ColorBrowShade(),
-          logo_widget(),
+          logo_widget(
+            i: 30,
+          ),
           Positioned(
-            top: 268,
+            top: 150,
             left: 64,
             child: Container(
               decoration: const BoxDecoration(
@@ -261,12 +284,8 @@ class _PetProfileScreenState extends State<PetProfileScreen> {
                       height: 20,
                     ),
                     GestureDetector(
-                      onTap: () async {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const PedHistoryScreen()));
+                      onTap: () {
+                        onTapFunction();
                       },
                       child: Container(
                         decoration: const BoxDecoration(

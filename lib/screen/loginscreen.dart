@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vet_care/component/mybutton.dart';
 import 'package:vet_care/component/mytextfield.dart';
-import 'package:vet_care/screen/registerscreen.dart';
 import 'package:vet_care/screen/rountscreen.dart';
 import 'package:vet_care/widgets/background_widget.dart';
 import 'package:vet_care/widgets/colorbrowshade_widget.dart';
@@ -24,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future login() async {
     try {
-      String uri = 'http://10.0.2.2/php_api/verify.php';
+      String uri = 'https://setest123.000webhostapp.com/php_api/verify.php';
       var res = await http.post(Uri.parse(uri), body: {
         "username": usernamecontroller.text,
         "password": passcontroller.text,
@@ -100,10 +99,10 @@ class _LoginScreenState extends State<LoginScreen> {
             right: 38,
             child: Container(
               decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 255, 255, 255),
-                  borderRadius: BorderRadius.all(Radius.circular(15))),
+                  color: Color.fromARGB(202, 255, 255, 255),
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
               width: 324,
-              height: 460,
+              height: 400,
               child: Form(
                 child: Column(
                   children: [
@@ -170,25 +169,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(
                       height: 40,
                     ),
-                    Text(
-                      ' หรือยังไม่ได้สมัครสมาชิค ',
-                      style: GoogleFonts.notoSansThai(
-                          textStyle: const TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w400),
-                          color: Color.fromARGB(255, 90, 90, 90)),
-                    ),
-                    const SizedBox(
-                      height: 13,
-                    ),
-                    MyButton(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => RegisterScreen()));
-                        },
-                        hinText: 'สมัครสมาชิก',
-                        color: Color.fromARGB(255, 255, 255, 255)),
                   ],
                 ),
               ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:vet_care/screen/menuscreen.dart';
-import 'package:vet_care/screen/notification_screen.dart';
 import 'package:vet_care/screen/profilescreen.dart';
 
 class BottomNavBarScreen extends StatefulWidget {
@@ -15,7 +14,6 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
 
   List<Widget> body = [
     MenuScreen(),
-    NontificationScreen(),
     ProfileScreen(),
   ];
 
@@ -34,9 +32,6 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
         },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'หน้าแรก'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.notifications_active_outlined),
-              label: 'แจ้งเตือน'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'โปรไฟล์'),
         ],
       ),

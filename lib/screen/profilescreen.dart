@@ -26,7 +26,9 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   background(),
                   ColorBrowShade(),
-                  logo_widget(),
+                  logo_widget(
+                    i: 100,
+                  ),
                   Positioned(
                     top: 268,
                     left: 64,
